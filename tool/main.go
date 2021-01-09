@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/hnit-acm/go-common/basic"
-	"github.com/hnit-acm/go-common/utils"
+	"github.com/hnit-acm/hfunc/basic"
+	"github.com/hnit-acm/hfunc/utils"
 	"io/ioutil"
 	"os"
 	"path/filepath"
