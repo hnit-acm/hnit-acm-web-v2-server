@@ -102,7 +102,7 @@ func (s SystemServiceController) BannerOne() (httpMethod, routeUri, version stri
 		}
 		switch params.Path {
 		case "/index":
-			err = hapi.NewErr(2, "")
+			err = hapi.NewCodeErr(2, "")
 			return
 		case "/practice":
 			resp.Url = "https://ali-cdn.educoder.net/images/avatars/PortalImage/101?t=1622106999"

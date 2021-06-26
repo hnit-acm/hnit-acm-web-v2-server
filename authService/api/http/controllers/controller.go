@@ -1,4 +1,4 @@
-package controller
+package controllers
 
 import (
 	"auth-service/common"
@@ -16,7 +16,7 @@ func (s AuthServiceController) RouterRegister(group *gin.RouterGroup) {
 }
 
 func (s AuthServiceController) RouterGroupName() (name string) {
-	return "auth-service"
+	return "auth_service"
 }
 
 func (s AuthServiceController) Middlewares() (middlewares []gin.HandlerFunc) {
@@ -43,6 +43,26 @@ type AuthReq struct {
 }
 type AuthResp struct {
 	Token string `json:"token,omitempty"`
+}
+
+func (s AuthServiceController) LoginGet() (httpMethod, routeUri, version string, handlerFunc gin.HandlerFunc) {
+	return http.MethodGet, "login", "v1", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "login.html", nil)
+	}
+}
+
+func (s AuthServiceController) LoginPost() (httpMethod, routeUri, version string, handlerFunc gin.HandlerFunc) {
+	return http.MethodPost, "login", "v1", func(ctx *gin.Context) {
+		if true {
+			ctx.Redirect(http.StatusFound, "/api/v1/auth_service/auth")
+		}
+	}
+}
+
+func (s AuthServiceController) AuthGet() (httpMethod, routeUri, version string, handlerFunc gin.HandlerFunc) {
+	return http.MethodGet, "auth", "v1", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "auth.html", nil)
+	}
 }
 
 func (s AuthServiceController) Auth() (httpMethod, routeUri, version string, handlerFunc gin.HandlerFunc) {

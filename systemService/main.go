@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	hapi.Server("3001", nil, func(c *gin.Engine) {
+	hapi.Server("8000", nil, func(c *gin.Engine) {
 		hapi.RegisterHandleFunc(c, func(engine *gin.Engine) *gin.RouterGroup {
 			return engine.Group("/api")
 		}, controller2.SystemServiceController{})

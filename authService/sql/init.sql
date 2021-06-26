@@ -1,2 +1,6 @@
-create database if not exists auth-service;
-use auth-service;
+create database if not exists authService;
+use authService;
+
+create table auth_info(
+
+);
