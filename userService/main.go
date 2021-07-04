@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/hnit-acm/hfunc/hapi"
+	"github.com/hnit-acm/hfunc/hserver/hhttp"
 	"user-service/api/http/controllers"
 )
 
@@ -52,12 +53,13 @@ import (
 // @x-extension-openapi {"example": "value on a json format"}
 
 func main() {
-	hapi.Server("8020", nil, func(c *gin.Engine) {
-		hapi.RegisterHandleFunc(c, func(engine *gin.Engine) *gin.RouterGroup {
-			return engine.Group("/api")
-		},
-			controllers.UserServiceController{},
-			controllers.UnAuthController{},
-		)
-	})
+	r := gin.Default()
+	hapi.RegisterHandleFunc(r, func(e *gin.Engine) *gin.RouterGroup {
+		return e.Group("/api")
+	},
+		controllers.UserServiceController{},
+		controllers.UnAuthController{},
+		controllers.AuthController{},
+	)
+	hapi.ServeAny(hhttp.WithAddr(":8020"), hhttp.WithHandler(r))
 }

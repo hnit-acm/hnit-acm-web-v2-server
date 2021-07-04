@@ -14,14 +14,14 @@ func RedisCluster() *redis.ClusterClient {
 	if _RedisCluster == nil {
 		cli := redis.NewClusterClient(&redis.ClusterOptions{
 			Addrs: []string{
-				"127.0.0.1:7000",
-				"127.0.0.1:7001",
-				"127.0.0.1:7002",
-				"127.0.0.1:7003",
-				"127.0.0.1:7004",
-				"127.0.0.1:7005",
+				"47.243.46.134:6379",
+				//"127.0.0.1:7001",
+				//"127.0.0.1:7002",
+				//"127.0.0.1:7003",
+				//"127.0.0.1:7004",
+				//"127.0.0.1:7005",
 			},
-			Password: "1234",
+			Password: "nieaowei",
 		})
 		cmd := cli.Ping(context.Background())
 		if cmd.Err() != nil {
@@ -31,4 +31,24 @@ func RedisCluster() *redis.ClusterClient {
 		_RedisCluster = cli
 	}
 	return _RedisCluster
+}
+
+var (
+	_RedisClient *redis.Client
+)
+
+func RedisClient() *redis.Client {
+	if _RedisCluster == nil {
+		cli := redis.NewClient(&redis.Options{
+			Addr:     "127.0.0.1:6379",
+			Password: "",
+		})
+		cmd := cli.Ping(context.Background())
+		if cmd.Err() != nil {
+			log.Panicln(cmd.Err())
+		}
+		log.Println(cmd.Result())
+		_RedisClient = cli
+	}
+	return _RedisClient
 }

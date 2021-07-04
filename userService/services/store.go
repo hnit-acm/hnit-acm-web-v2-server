@@ -2,7 +2,6 @@ package services
 
 import (
 	"github.com/gin-gonic/contrib/sessions"
-	"github.com/hnit-acm/hfunc/hapi/hsessions"
 	"log"
 )
 
@@ -12,7 +11,7 @@ var (
 
 func SessionStore() sessions.Store {
 	if _SessionStore == nil {
-		s, err := hsessions.NewRedisStoreClusterCli(RedisCluster())
+		s, err := sessions.NewRedisStore(5, "tcp", "127.0.0.1:6379", "", []byte("secret"))
 		if err != nil {
 			log.Panicln(err)
 		}

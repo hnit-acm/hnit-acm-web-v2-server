@@ -11,8 +11,8 @@ const (
 	JwtExpireAt = 60 * 60
 )
 
-func JwtDecode(toekenStr string) (*jwt.StandardClaims, error) {
-	token, err := jwt.ParseWithClaims(toekenStr, &jwt.StandardClaims{}, func(t *jwt.Token) (interface{}, error) {
+func JwtDecode(tokenStr string) (*jwt.StandardClaims, error) {
+	token, err := jwt.ParseWithClaims(tokenStr, &jwt.StandardClaims{}, func(t *jwt.Token) (interface{}, error) {
 		return []byte(JwtSignKey), nil
 	})
 	if err != nil {

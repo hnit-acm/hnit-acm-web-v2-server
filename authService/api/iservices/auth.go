@@ -1,0 +1,5 @@
+package iservices
+
+func ValidateClient() {
+
+}

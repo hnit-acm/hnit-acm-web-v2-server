@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/hnit-acm/hfunc/hapi"
 	"net/http"
 	"user-service/api/http/middlewares"
+	"user-service/services"
 )
 
 type Response struct {
@@ -26,6 +28,7 @@ func (s UserServiceController) RouterGroupName() (name string) {
 
 func (s UserServiceController) Middlewares() []gin.HandlerFunc {
 	return []gin.HandlerFunc{
+		sessions.Sessions("user_service", services.SessionStore()),
 		middlewares.AuthMW,
 	}
 }
